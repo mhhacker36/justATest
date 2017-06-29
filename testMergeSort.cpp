@@ -27,6 +27,7 @@ void MergeSort::sortArr(int *mainArr, int *auxArr, int lo, int hi){
 	int mid = lo + (hi - lo) / 2;
 	sortArr(mainArr, auxArr, lo, mid);
 	sortArr(mainArr, auxArr, mid + 1, hi);
+	if(mainArr[mid] < mainArr[mid + 1]) return;//This is to avoid extra work if already sorted. Smart right, well not my idea ;-)
 	mergeArr(mainArr, auxArr, lo, mid, hi);
 }
 void MergeSort::mergeArr(int *mainArr, int *auxArr, int lo, int mid, int hi){
