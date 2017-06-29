@@ -1,7 +1,7 @@
 //This is a Merge Sort code for Github test
 #include <iostream>
 
-//using namespace  std;
+using namespace  std;
 
 class MergeSort
 {
@@ -19,7 +19,6 @@ public:
 			cin>>arr[i];
 		}
 	}
-	~MergeSort();
 	void sortArr();
 	void displayArr();
 };
@@ -36,21 +35,21 @@ void MergeSort::mergeArr(int *mainArr, int *auxArr, int lo, int mid, int hi){
 	{
 		auxArr[i] = mainArr[i];
 	}
-	i = lo - 1, j = mid;
+	i = lo, j = mid + 1;
 	for (int k = lo; k <= hi; ++k)
 	{
-		if(i > mid) mainArr[k] = auxArr[++i];
-		else if(j > hi) mainArr[k] = auxArr[++j];
-		else if(auxArr[j] < auxArr[i]) mainArr[k] = auxArr[++j];
-		else mainArr[k] = auxArr[++i];
+		if(i > mid) mainArr[k] = auxArr[j++];//I was mismanipulating the overflow conditions
+		else if(j > hi) mainArr[k] = auxArr[i++];
+		else if(auxArr[j] < auxArr[i]) mainArr[k] = auxArr[j++];
+		else mainArr[k] = auxArr[i++];
 	}
 }
 void MergeSort::sortArr(){
 	for (int i = 0; i < size; ++i)
 	{
-		aux[i] = arr[i];
-		sortArr(arr, aux, 0, size - 1);
+		aux[i] = arr[i];	
 	}
+	sortArr(arr, aux, 0, size - 1);//I had placed it inside the copy loop
 }
 void MergeSort::displayArr(){
 	cout<<"\nThe array is: ";
